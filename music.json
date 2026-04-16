@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "Čaršija",
+    "artist": "Al Dino",
+    "path": "music/1.mp3",
+    "img": "music/slike/1.jpg",
+    "cat": "zabavna"
+  },
+  {
+    "id": 2,
+    "name": "Bez Zavičaja Sreće Nema",
+    "artist": "Nervozni Postar",
+    "path": "music/2.mp3",
+    "img": "music/slike/2.jpg",
+    "cat": "narodna"
+  },
+  {
+    "id": 3,
+    "name": "Duge Kise Jesenje",
+    "artist": "Mladen Vojičić - Tifa",
+    "path": "music/3.mp3",
+    "img": "music/slike/3.jpg",
+    "cat": "zabavna"
+  },
+  {
+    "id": 4,
+    "name": "Ostavljam Ti Sve",
+    "artist": "Fazlija",
+    "path": "music/4.mp3",
+    "img": "music/slike/4.jpg",
+    "cat": "narodna"
+  },
+  {
+    "id": 5,
+    "name": "Drugi sad ljubi oko moje",
+    "artist": "Ivan Kukolj Kuki",
+    "path": "music/5.mp3",
+    "img": "music/slike/5.jpg",
+    "cat": "narodna"
+  },
+  {
+    "id": 6,
+    "name": "Dajte mi da živim",
+    "artist": "Mitar Mirić",
+    "path": "music/6.mp3",
+    "img": "music/slike/6.jpg",
+    "cat": "narodna"
+  }
+  {
+    "id": 7,
+    "name": "Vidovdan",
+    "artist": "Gordana Lazarevic",
+    "path": "music/7.mp3",
+    "img": "music/slike/7.jpg",
+    "cat": "zabavna"
+  },
+  {
+    "id": 8,
+    "name": "Isplaci se, bice ti lakse",
+    "artist": "Jasar Ahmedovski",
+    "path": "music/8.mp3",
+    "img": "music/slike/8.jpg",
+    "cat": "narodna"
+  },
+  {
+    "id": 9,
+    "name": "Kleo se kleo",
+    "artist": "Biljana Jevtic",
+    "path": "music/9.mp3",
+    "img": "music/slike/9.jpg",
+    "cat": "narodna"
+  },
+  {
+    "id": 10,
+    "name": "Zivim sam",
+    "artist": "Asim Bajric",
+    "path": "music/10.mp3",
+    "img": "music/slike/10.jpg",
+    "cat": "narodna"
+  }
+]

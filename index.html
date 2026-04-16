@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Music Player</title>
+    <style>
+        :root {
+            --color-fore: #233742;
+            --color-light: #b4cddd;
+            --color-shade: #f1f5f7;
+            --color-shade-crisp: #edf2f5;
+            --color-back: #fff;
+            --color-primary: #76a5af;
+            --color-primary-shade: #e06666;
+            --color-secondary: #00c3bf;
+            --color-shadow: rgba(118, 165, 175, 0.3);
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+            background-color: var(--color-back);
+            color: var(--color-fore);
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        .app-shell {
+            width: 100%;
+            max-width: 1200px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: var(--color-back);
+            padding-top: 20px;
+        }
+
+        /* CATEGORIES */
+        .category-row {
+            display: flex;
+            gap: 16px;
+            padding: 10px 20px 25px;
+            overflow-x: auto;
+        }
+        .category-row::-webkit-scrollbar { display: none; }
+
+        .cat-card {
+            min-width: 140px;
+            flex: 1;
+            height: 160px;
+            border-radius: 28px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 10px 20px var(--color-shadow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @media (min-width: 768px) {
+            .cat-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px var(--color-shadow); }
+        }
+        
+        .cat-card:active { transform: scale(0.96); }
+        .cat-vse { background: linear-gradient(180deg, var(--color-fore), #111); }
+        .cat-balkan { background: linear-gradient(180deg, var(--color-primary), var(--color-secondary)); }
+        .cat-narodna { background: linear-gradient(180deg, var(--color-primary-shade), #d9534f); }
+        
+        .cat-card strong { font-size: 1.2rem; font-weight: 700; display: block; }
+        .cat-card span { font-size: 0.8rem; opacity: 0.8; }
+
+        /* LIST */
+        .content {
+            flex: 1;
+            padding: 0 20px;
+            overflow-y: auto;
+            padding-bottom: 180px;
+        }
+
+        h2 {
+            font-size: 0.9rem;
+            font-weight: 800;
+            margin: 10px 5px 25px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--color-primary);
+            opacity: 0.8;
+        }
+
+        #playlist {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 768px) {
+            #playlist { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1000px) {
+            #playlist { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        }
+
+        /* SONG ITEM */
+        .station-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            border-radius: 24px;
+            cursor: pointer;
+            background: var(--color-shade-crisp);
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+        
+        .station-item.active-playing {
+            background: var(--color-light);
+            border-color: var(--color-primary);
+            box-shadow: 0 8px 20px rgba(118, 165, 175, 0.2);
+        }
+
+        .station-img {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .station-info { flex: 1; min-width: 0; }
+        .station-name { font-weight: 700; font-size: 1rem; margin-bottom: 3px; }
+        .station-desc { font-size: 0.8rem; color: #8a9ba5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        /* WAVE VISUALIZATION */
+        .wave-container { display: flex; align-items: flex-end; gap: 3px; height: 18px; width: 30px; }
+        .wave-bar {
+            width: 3px; height: 4px;
+            background-color: var(--color-primary);
+            border-radius: 2px;
+            animation: wave-animation 1s ease-in-out infinite;
+        }
+        .wave-bar:nth-child(2) { animation-delay: 0.2s; }
+        .wave-bar:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes wave-animation {
+            0%, 100% { height: 4px; }
+            50% { height: 18px; }
+        }
+
+        /* PLAYER BAR BOTTOM */
+        .player-bar {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 1160px;
+            background: rgba(35, 55, 66, 0.98);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 35px;
+            padding: 15px 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            z-index: 1000;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .player-main { display: flex; align-items: center; width: 100%; }
+        .player-img { width: 54px; height: 54px; border-radius: 14px; margin-right: 15px; object-fit: cover; }
+        .player-meta { flex: 1; overflow: hidden; }
+        .player-title { font-weight: 700; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        
+        .controls-group { display: flex; align-items: center; gap: 12px; }
+        .btn-nav { background: none; border: none; color: white; cursor: pointer; opacity: 0.8; }
+        .btn-nav svg { width: 22px; height: 22px; fill: currentColor; }
+
+        .master-control {
+            width: 54px; height: 54px; background: var(--color-primary);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+        .master-control svg { width: 24px; height: 24px; fill: white; }
+
+        .progress-container { width: 100%; height: 5px; background: rgba(255,255,255,0.1); border-radius: 10px; cursor: pointer; overflow: hidden; }
+        #progress-bar { height: 100%; width: 0%; background: var(--color-primary); }
+        .time-info { display: flex; justify-content: space-between; font-size: 0.65rem; color: rgba(255,255,255,0.4); }
+
+    </style>
+</head>
+<body>
+
+    <div class="app-shell">
+        <div class="category-row">
+            <div class="cat-card cat-vse" onclick="renderSongs('all')">
+                <strong>All</strong>
+                <span>All songs</span>
+            </div>
+            <div class="cat-card cat-balkan" onclick="renderSongs('entertainment')">
+                <strong>Entertainment</strong>
+                <span>Pop & Fun</span>
+            </div>
+            <div class="cat-card cat-narodna" onclick="renderSongs('traditional')">
+                <strong>Traditional</strong>
+                <span>Folk Music</span>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2 id="list-title">All Songs</h2>
+            <div id="playlist"></div>
+        </div>
+
+        <audio id="main-audio"></audio>
+
+        <div class="player-bar" id="player-ui">
+            <div class="progress-container" id="progress-box">
+                <div id="progress-bar"></div>
+            </div>
+            <div class="time-info">
+                <span id="current-time">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+            
+            <div class="player-main">
+                <img id="p-img" src="" class="player-img" style="display:none;">
+                <div class="player-meta">
+                    <div id="p-name" class="player-title">Select a song</div>
+                    <div id="p-artist" style="font-size: 0.75rem; color: var(--color-secondary); font-weight: 700;">READY</div>
+                </div>
+                
+                <div class="controls-group">
+                    <button class="btn-nav" onclick="changeSong(-1)">
+                        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                    </button>
+                    
+                    <div class="master-control" onclick="togglePlay()">
+                        <div id="play-pause-icon">
+                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                    </div>
+
+                    <button class="btn-nav" onclick="changeSong(1)">
+                        <svg viewBox="0 0 24 24"><path d="M16 18h2V6h-2zm-10 0l8.5-6L6 6z"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let songs = [];
+        let currentIdx = -1;
+        let activeFilter = 'all';
+        const audio = document.getElementById('main-audio');
+        
+        const playIcon = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+        const pauseIcon = '<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+        const waveHTML = `<div class="wave-container"><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div></div>`;
+
+        async function loadMusic() {
+            try {
+                const res = await fetch('music.json');
+                songs = await res.json();
+                renderSongs('all');
+            } catch (e) { console.error("Error:", e); }
+        }
+
+        function renderSongs(cat) {
+            activeFilter = cat;
+            const container = document.getElementById('playlist');
+            container.innerHTML = '';
+            document.getElementById('list-title').innerText = cat === 'all' ? "All Songs" : cat.toUpperCase();
+
+            // Mapping for translation consistency with JSON 'cat' field if needed
+            const filtered = cat === 'all' ? songs : songs.filter(s => {
+                if (!s.cat) return false;
+                const songCat = s.cat.toLowerCase();
+                if (cat === 'entertainment') return songCat === 'zabavna' || songCat === 'entertainment';
+                if (cat === 'traditional') return songCat === 'narodna' || songCat === 'traditional';
+                return songCat === cat.toLowerCase();
+            });
+
+            filtered.forEach((s) => {
+                const globalIndex = songs.indexOf(s);
+                const isPlaying = (globalIndex === currentIdx && !audio.paused);
+                
+                const item = document.createElement('div');
+                item.className = `station-item ${globalIndex === currentIdx ? 'active-playing' : ''}`;
+                item.innerHTML = `
+                    <img src="${s.img}" class="station-img">
+                    <div class="station-info">
+                        <div class="station-name">${s.name}</div>
+                        <div class="station-desc">${s.artist}</div>
+                    </div>
+                    <div class="mini-status">${isPlaying ? waveHTML : ''}</div>
+                `;
+                item.onclick = () => playSong(globalIndex);
+                container.appendChild(item);
+            });
+        }
+
+        function playSong(idx) {
+            if (currentIdx === idx && !audio.paused) {
+                togglePlay();
+                return;
+            }
+            currentIdx = idx;
+            audio.src = songs[idx].path;
+            audio.play();
+            updatePlayerUI(songs[idx]);
+            renderSongs(activeFilter);
+        }
+
+        function updatePlayerUI(s) {
+            document.getElementById('p-img').src = s.img;
+            document.getElementById('p-img').style.display = 'block';
+            document.getElementById('p-name').innerText = s.name;
+            document.getElementById('p-artist').innerText = "PLAYING";
+            document.getElementById('play-pause-icon').innerHTML = pauseIcon;
+        }
+
+        function togglePlay() {
+            if (!audio.src && songs.length > 0) { playSong(0); return; }
+            if (audio.paused) {
+                audio.play();
+                document.getElementById('play-pause-icon').innerHTML = pauseIcon;
+            } else {
+                audio.pause();
+                document.getElementById('play-pause-icon').innerHTML = playIcon;
+            }
+            renderSongs(activeFilter);
+        }
+
+        function changeSong(dir) {
+            let n = currentIdx + dir;
+            if (n >= songs.length) n = 0;
+            if (n < 0) n = songs.length - 1;
+            playSong(n);
+        }
+
+        audio.ontimeupdate = () => {
+            if (audio.duration) {
+                const pct = (audio.currentTime / audio.duration) * 100;
+                document.getElementById('progress-bar').style.width = pct + "%";
+                document.getElementById('current-time').innerText = formatTime(audio.currentTime);
+                document.getElementById('duration').innerText = formatTime(audio.duration);
+            }
+        };
+
+        document.getElementById('progress-box').onclick = (e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+        };
+
+        function formatTime(s) {
+            return Math.floor(s/60) + ":" + String(Math.floor(s%60)).padStart(2,'0');
+        }
+
+        audio.onended = () => changeSong(1);
+        window.onload = loadMusic;
+    </script>
+</body>
+</html>
