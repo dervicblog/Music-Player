@@ -3,80 +3,80 @@
     "id": 1,
     "name": "Čaršija",
     "artist": "Al Dino",
-    "path": "https://github.com/dervicblog/Music-Player/raw/refs/heads/dervicdev/Hangman-Game/music/1.mp3",
-    "img": "https://raw.githubusercontent.com/dervicblog/Music-Player/refs/heads/dervicdev/Hangman-Game/music/slike/1.jpg",
+    "path": "music/1.mp3",
+    "img": "music/slike/1.jpg",
     "cat": "zabavna"
   },
   {
     "id": 2,
     "name": "Bez Zavičaja Sreće Nema",
     "artist": "Nervozni Postar",
-    "path": "https://github.com/dervicblog/Music-Player/raw/refs/heads/dervicdev/Hangman-Game/music/2.mp3",
-    "img": "https://raw.githubusercontent.com/dervicblog/Music-Player/refs/heads/dervicdev/Hangman-Game/music/slike/2.jpg",
+    "path": "music/2.mp3",
+    "img": "music/slike/2.jpg",
     "cat": "narodna"
   },
   {
     "id": 3,
     "name": "Duge Kise Jesenje",
     "artist": "Mladen Vojičić - Tifa",
-    "path": "https://github.com/dervicblog/Music-Player/raw/refs/heads/dervicdev/Hangman-Game/music/3.mp3",
-    "img": "https://raw.githubusercontent.com/dervicblog/Music-Player/refs/heads/dervicdev/Hangman-Game/music/slike/3.jpg",
+    "path": "music/3.mp3",
+    "img": "music/slike/3.jpg",
     "cat": "zabavna"
   },
   {
     "id": 4,
     "name": "Ostavljam Ti Sve",
     "artist": "Fazlija",
-    "path": "https://github.com/dervicblog/Music-Player/raw/refs/heads/dervicdev/Hangman-Game/music/4.mp3",
-    "img": "https://raw.githubusercontent.com/dervicblog/Music-Player/refs/heads/dervicdev/Hangman-Game/music/slike/4.jpg",
+    "path": "music/4.mp3",
+    "img": "music/slike/4.jpg",
     "cat": "narodna"
   },
   {
     "id": 5,
     "name": "Drugi sad ljubi oko moje",
     "artist": "Ivan Kukolj Kuki",
-    "path": "https://github.com/dervicblog/Music-Player/raw/refs/heads/dervicdev/Hangman-Game/music/5.mp3",
-    "img": "https://raw.githubusercontent.com/dervicblog/Music-Player/refs/heads/dervicdev/Hangman-Game/music/slike/5.jpg",
+    "path": "music/5.mp3",
+    "img": "music/slike/5.jpg",
     "cat": "narodna"
   },
   {
     "id": 6,
     "name": "Dajte mi da živim",
     "artist": "Mitar Mirić",
-    "path": "https://github.com/dervicblog/Music-Player/raw/refs/heads/dervicdev/Hangman-Game/music/6.mp3",
-    "img": "https://raw.githubusercontent.com/dervicblog/Music-Player/refs/heads/dervicdev/Hangman-Game/music/slike/6.jpg",
+    "path": "music/6.mp3",
+    "img": "music/slike/6.jpg",
     "cat": "narodna"
   },
   {
     "id": 7,
     "name": "Vidovdan",
     "artist": "Gordana Lazarevic",
-    "path": "https://github.com/dervicblog/Music-Player/raw/refs/heads/dervicdev/Hangman-Game/music/7.mp3",
-    "img": "https://raw.githubusercontent.com/dervicblog/Music-Player/refs/heads/dervicdev/Hangman-Game/music/slike/7.jpg",
+    "path": "music/7.mp3",
+    "img": "music/slike/7.jpg",
     "cat": "zabavna"
   },
   {
     "id": 8,
     "name": "Isplaci se, bice ti lakse",
     "artist": "Jasar Ahmedovski",
-    "path": "https://github.com/dervicblog/Music-Player/raw/refs/heads/dervicdev/Hangman-Game/music/8.mp3",
-    "img": "https://raw.githubusercontent.com/dervicblog/Music-Player/refs/heads/dervicdev/Hangman-Game/music/slike/8.jpg",
+    "path": "music/8.mp3",
+    "img": "music/slike/8.jpg",
     "cat": "narodna"
   },
   {
     "id": 9,
     "name": "Kleo se kleo",
     "artist": "Biljana Jevtic",
-    "path": "https://github.com/dervicblog/Music-Player/raw/refs/heads/dervicdev/Hangman-Game/music/9.mp3",
-    "img": "https://raw.githubusercontent.com/dervicblog/Music-Player/refs/heads/dervicdev/Hangman-Game/music/slike/9.jpg",
+    "path": "music/9.mp3",
+    "img": "music/slike/9.jpg",
     "cat": "narodna"
   },
   {
     "id": 10,
     "name": "Zivim sam",
     "artist": "Asim Bajric",
-    "path": "https://github.com/dervicblog/Music-Player/raw/refs/heads/dervicdev/Hangman-Game/music/10.mp3",
-    "img": "https://raw.githubusercontent.com/dervicblog/Music-Player/refs/heads/dervicdev/Hangman-Game/music/slike/10.jpg",
+    "path": "music/10.mp3",
+    "img": "music/slike/10.jpg",
     "cat": "narodna"
   }
 ]
