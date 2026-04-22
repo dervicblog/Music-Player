@@ -2,8 +2,7 @@
 
 A modern, responsive web-based music player built with clean web technologies. This project features a dynamic playlist, interactive controls, and a sleek user interface.
 
-![App Screenshot](muscic.png) 
-*Replace 'screenshot.png' with the actual path to your image file in the repository.*
+![App Screenshot](music.png)
 
 ## ✨ Features
 
