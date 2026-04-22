@@ -203,12 +203,12 @@
                 <strong>All</strong>
                 <span>All songs</span>
             </div>
-            <div class="cat-card cat-balkan" onclick="renderSongs('entertainment')">
-                <strong>Entertainment</strong>
+            <div class="cat-card cat-balkan" onclick="renderSongs('balkan')">
+                <strong>Balkan</strong>
                 <span>Pop & Fun</span>
             </div>
-            <div class="cat-card cat-narodna" onclick="renderSongs('traditional')">
-                <strong>Traditional</strong>
+            <div class="cat-card cat-narodna" onclick="renderSongs('folk')">
+                <strong>Folk</strong>
                 <span>Folk Music</span>
             </div>
         </div>
@@ -283,8 +283,8 @@
             const filtered = cat === 'all' ? songs : songs.filter(s => {
                 if (!s.cat) return false;
                 const songCat = s.cat.toLowerCase();
-                if (cat === 'entertainment') return songCat === 'zabavna' || songCat === 'entertainment';
-                if (cat === 'traditional') return songCat === 'narodna' || songCat === 'traditional';
+                if (cat === 'balkan') return songCat === 'zabavna' || songCat === 'balkan';
+                if (cat === 'folk') return songCat === 'narodna' || songCat === 'folk';
                 return songCat === cat.toLowerCase();
             });
 
